@@ -26,13 +26,25 @@ public class App {
 
         bookshelf.print();
 
-        System.out.println(bookshelf.length());
+        System.out.println("-------------------");
 
-        System.out.println("Todos os livros de Robert C. Martin: ");
+        bookshelf.sort(1);
 
-        ArrayList<String> books = bookshelf.getBooksByAuthor("Robert C. Martin");
+        bookshelf.print();
 
-        System.out.println(books);
+        System.out.println("-------------------");
+
+        bookshelf.sort(0);
+
+        bookshelf.print();
+
+        //System.out.println(bookshelf.length());
+
+        //System.out.println("Todos os livros de Robert C. Martin: ");
+
+        //ArrayList<String> books = bookshelf.getBooksByAuthor("Robert C. Martin");
+
+        //System.out.println(books);
 
         /*
          * Book bookSearched = bookshelf.getBookByAuthor("Robert C. Martin");
