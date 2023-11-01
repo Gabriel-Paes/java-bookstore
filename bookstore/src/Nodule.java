@@ -1,35 +1,35 @@
-public class Nodule<T> {
-    private T data;
-    private Nodule<T> next;
+public class Nodule {
+    private Book book;
+    private Nodule next;
 
-    public Nodule(T data) {
-        this.data = data;
+    public Nodule(Book book) {
+        this.book = book;
         this.next = null;
     }
 
-    public Nodule(T data, Nodule<T> next) {
-        this.data = data;
+    public Nodule(Book book, Nodule next) {
+        this.book = book;
         this.next = next;
     }
 
-    public T getData() {
-        return data;
+    public Book getBook() {
+        return book;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
-    public Nodule<T> getNext() {
+    public Nodule getNext() {
         return next;
     }
 
-    public void setNext(Nodule<T> next) {
+    public void setNext(Nodule next) {
         this.next = next;
     }
 
     @Override
     public String toString() {
-        return "Nodule [data=" + data + ", next=" + next + "]";
+        return "Nodule [book=" + book + ", next=" + next + "]";
     }
 }
