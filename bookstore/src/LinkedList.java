@@ -15,6 +15,14 @@ public class LinkedList {
         this.length++;
     }
 
+    public void sort(int sortedBy) {
+        if (sortedBy == 0) {
+            sortByTitle();
+        } else {
+            sortByAuthor();
+        }
+    }
+
     public int length() {
         return this.length;
     }
@@ -180,6 +188,76 @@ public class LinkedList {
             cell.setNext(current.getNext());
             current.setNext(cell);
         }
+    }
+
+    private void sortByTitle() {
+        Nodule sortedStart = null;
+        Nodule sortedEnd = null;
+        Nodule current = this.start;
+
+        while (current != null) {
+            Nodule next = current.getNext();
+            if (sortedStart == null || current.getBook().getTitle().compareTo(sortedStart.getBook().getTitle()) <= 0) {
+                current.setNext(sortedStart);
+                sortedStart = current;
+            } else {
+                Nodule prev = sortedStart;
+                Nodule temp = sortedStart.getNext();
+
+                while (temp != null && current.getBook().getTitle().compareTo(temp.getBook().getTitle()) > 0) {
+                    prev = temp;
+                    temp = temp.getNext();
+                }
+
+                prev.setNext(current);
+                current.setNext(temp);
+
+                if (temp == null) {
+                    sortedEnd = current;
+                }
+            }
+
+            current = next;
+        }
+
+        this.start = sortedStart;
+        this.end = sortedEnd;
+        this.isSortedBy = 0;
+    }
+
+    private void sortByAuthor() {
+        Nodule sortedStart = null;
+        Nodule sortedEnd = null;
+        Nodule current = this.start;
+
+        while (current != null) {
+            Nodule next = current.getNext();
+            if (sortedStart == null || current.getBook().getAuthor().compareTo(sortedStart.getBook().getAuthor()) <= 0) {
+                current.setNext(sortedStart);
+                sortedStart = current;
+            } else {
+                Nodule prev = sortedStart;
+                Nodule temp = sortedStart.getNext();
+
+                while (temp != null && current.getBook().getAuthor().compareTo(temp.getBook().getAuthor()) > 0) {
+                    prev = temp;
+                    temp = temp.getNext();
+                }
+
+                prev.setNext(current);
+                current.setNext(temp);
+
+                if (temp == null) {
+                    sortedEnd = current;
+                }
+            }
+
+            current = next;
+        }
+
+        this.start = sortedStart;
+        this.end = sortedEnd;
+        this.isSortedBy = 1;
     }
 
     public void print() {

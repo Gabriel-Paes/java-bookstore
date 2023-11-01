@@ -30,6 +30,20 @@ public class App {
 
                 System.out.println(bookshelf.length());
 
+                System.out.println("-------------------");
+
+                bookshelf.sort(1);
+
+                bookshelf.print();
+
+                System.out.println("-------------------");
+
+                bookshelf.sort(0);
+
+                bookshelf.print();
+          
+                System.out.println("-------------------");
+          
                 System.out.println("Todos os livros de Robert C. Martin: ");
 
                 ArrayList<String> books = bookshelf.getBooksByAuthor("Robert C. Martin");
@@ -37,7 +51,13 @@ public class App {
                 bookshelf.loanBook("Arquitetura Limpa");
                 bookshelf.returnBook("Arquitetura Limpa");
 
-                System.out.println(books);
+                //System.out.println(bookshelf.length());
+
+                //System.out.println("Todos os livros de Robert C. Martin: ");
+
+                //ArrayList<String> books = bookshelf.getBooksByAuthor("Robert C. Martin");
+
+                //System.out.println(books);
 
                 /*
                  * Book bookSearched = bookshelf.getBookByAuthor("Robert C. Martin");
