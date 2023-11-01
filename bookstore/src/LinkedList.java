@@ -1,16 +1,17 @@
+import java.util.ArrayList;
+
 public class LinkedList {
     private Nodule start;
     private Nodule end;
     private int length = 0;
+    private int isSortedBy = 0; // 0 = title; 1 = author;
 
     public void push(Book book) {
-        Nodule cell = new Nodule(book);
-        if (this.length == 0) {
-            this.start = cell;
+        if (this.isSortedBy == 0) {
+            insertionSortByTitle(book);
         } else {
-            this.end.setNext(cell);
+            insertionSortByAuthor(book);
         }
-        this.end = cell;
         this.length++;
     }
 
@@ -86,6 +87,59 @@ public class LinkedList {
             }
         }
         return null;
+    }
+
+    public ArrayList<String> getBooksByAuthor(String author) {
+        ArrayList<String> booksByAuthor = new ArrayList<String>();
+        for (Nodule current = this.start; current != null; current = current.getNext()) {
+            if (current.getBook().getAuthor().equals(author)) {
+                booksByAuthor.add(current.getBook().getTitle());
+            }
+        }
+        return booksByAuthor;
+    }
+
+    private void insertionSortByTitle(Book book) {
+        Nodule cell = new Nodule(book);
+        if (this.length == 0) {
+            this.start = cell;
+            this.end = cell;
+        } else if (book.getTitle().compareTo(this.start.getBook().getTitle()) <= 0) {
+            cell.setNext(this.start);
+            this.start = cell;
+        } else if (book.getTitle().compareTo(this.end.getBook().getTitle()) >= 0) {
+            this.end.setNext(cell);
+            this.end = cell;
+        } else {
+            Nodule current = this.start;
+            while (current.getNext() != null && book.getTitle().compareTo(current.getNext().getBook().getTitle()) > 0) {
+                current = current.getNext();
+            }
+            cell.setNext(current.getNext());
+            current.setNext(cell);
+        }
+    }
+
+    private void insertionSortByAuthor(Book book) {
+        Nodule cell = new Nodule(book);
+        if (this.length == 0) {
+            this.start = cell;
+            this.end = cell;
+        } else if (book.getAuthor().compareTo(this.start.getBook().getAuthor()) <= 0) {
+            cell.setNext(this.start);
+            this.start = cell;
+        } else if (book.getAuthor().compareTo(this.end.getBook().getAuthor()) >= 0) {
+            this.end.setNext(cell);
+            this.end = cell;
+        } else {
+            Nodule current = this.start;
+            while (current.getNext() != null
+                    && book.getAuthor().compareTo(current.getNext().getBook().getAuthor()) > 0) {
+                current = current.getNext();
+            }
+            cell.setNext(current.getNext());
+            current.setNext(cell);
+        }
     }
 
     public void print() {
