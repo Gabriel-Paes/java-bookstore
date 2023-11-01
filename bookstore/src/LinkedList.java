@@ -27,12 +27,12 @@ public class LinkedList {
         return this.length;
     }
 
-    public void remove(String nameOrISBN) {
+    public void remove(String titleOrISBN) {
         if (this.length == 0) {
             return;
         }
 
-        if (this.start.getBook().getTitle().equals(nameOrISBN) || this.start.getBook().getISBN().equals(nameOrISBN)) {
+        if (this.start.getBook().getTitle().equals(titleOrISBN) || this.start.getBook().getISBN().equals(titleOrISBN)) {
             this.start = this.start.getNext();
             if (this.length == 1) {
                 this.end = null;
@@ -43,8 +43,8 @@ public class LinkedList {
 
         Nodule current = this.start;
         while (current.getNext() != null) {
-            if (current.getNext().getBook().getTitle().equals(nameOrISBN)
-                    || current.getNext().getBook().getISBN().equals(nameOrISBN)) {
+            if (current.getNext().getBook().getTitle().equals(titleOrISBN)
+                    || current.getNext().getBook().getISBN().equals(titleOrISBN)) {
                 current.setNext(current.getNext().getNext());
 
                 if (current.getNext() == null) {
@@ -105,6 +105,46 @@ public class LinkedList {
             }
         }
         return booksByAuthor;
+    }
+
+    public void loanBook(String titleOrISBN) {
+        boolean isFindBook = false;
+        for (Nodule current = this.start; current != null; current = current.getNext()) {
+            if (current.getBook().getTitle().equals(titleOrISBN) || current.getBook().getISBN().equals(titleOrISBN)) {
+                if (current.getBook().getIsAvailable()) {
+                    current.getBook().setIsAvailable(false);
+                    System.out.println("O livro será emprestado para você!");
+                } else {
+                    System.out.println("Livro já está emprestado!");
+                }
+                isFindBook = true;
+                break;
+            }
+        }
+
+        if (!isFindBook) {
+            System.out.println("Livro não encontrado");
+        }
+    }
+
+    public void returnBook(String titleOrISBN) {
+        boolean isFindBook = false;
+        for (Nodule current = this.start; current != null; current = current.getNext()) {
+            if (current.getBook().getTitle().equals(titleOrISBN) || current.getBook().getISBN().equals(titleOrISBN)) {
+                if (!current.getBook().getIsAvailable()) {
+                    current.getBook().setIsAvailable(true);
+                    System.out.println("Livro devolvido com sucesso!");
+                } else {
+                    System.out.println("O livro já foi devolvido!");
+                }
+                isFindBook = true;
+                break;
+            }
+        }
+
+        if (!isFindBook) {
+            System.out.println("Livro não encontrado");
+        }
     }
 
     private void insertionSortByTitle(Book book) {
