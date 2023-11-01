@@ -88,23 +88,13 @@ public class LinkedList {
         return null;
     }
 
-    @Override
-    public String toString() {
+    public void print() {
         if (this.length == 0) {
-            return "[]";
+            System.out.println("[]");
         }
 
-        StringBuilder builder = new StringBuilder("[ ");
-
-        Nodule current = this.start;
-
-        for (int i = 0; i < this.length - 1; i++) {
-            builder.append(current.getBook()).append(", ");
-            current = current.getNext();
+        for (Nodule current = this.start; current != null; current = current.getNext()) {
+            current.getBook().printBook();
         }
-
-        builder.append(current.getBook()).append(" ]");
-
-        return builder.toString();
     }
 }
