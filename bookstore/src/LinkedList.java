@@ -38,6 +38,7 @@ public class LinkedList {
                 this.end = null;
             }
             this.length--;
+            System.out.println("Livro removido com sucesso!");
             return;
         }
 
@@ -51,10 +52,12 @@ public class LinkedList {
                     this.end = current;
                 }
                 this.length--;
+                System.out.println("Livro removido com sucesso!");
                 return;
             }
             current = current.getNext();
         }
+        System.out.println("Livro não encontrado");
     }
 
     public void clear() {
@@ -232,7 +235,8 @@ public class LinkedList {
 
         while (current != null) {
             Nodule next = current.getNext();
-            if (sortedStart == null || current.getBook().getAuthor().compareTo(sortedStart.getBook().getAuthor()) <= 0) {
+            if (sortedStart == null
+                    || current.getBook().getAuthor().compareTo(sortedStart.getBook().getAuthor()) <= 0) {
                 current.setNext(sortedStart);
                 sortedStart = current;
             } else {
